@@ -10,6 +10,10 @@ public class CompraDto {
     @NotBlank(message = "La fecha no puede ser nula")
     private LocalDateTime fechaCreacion;
 
+
+    public CompraDto() {
+    }
+
     public CompraDto(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }

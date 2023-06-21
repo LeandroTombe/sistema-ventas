@@ -30,7 +30,7 @@ public class Compra {
     @OneToMany(mappedBy = "compra")
     private List<LineaCompra> lineaCompras;
 
-    private Compra(){}
+    public Compra(){}
 
     public Compra(LocalDateTime fechaCreacion, List<LineaCompra> lineaCompras) {
         this.fechaCreacion = fechaCreacion;

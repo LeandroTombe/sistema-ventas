@@ -21,4 +21,31 @@ public class Venta {
     private List<LineaVenta> lineaVentas;
 
 
+    public Venta() {
+    }
+
+    public Venta(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Long getIdVenta() {
+        return idVenta;
+    }
+
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public List<LineaVenta> getLineaVentas() {
+        return lineaVentas;
+    }
+
+    public void setLineaVentas(List<LineaVenta> lineaVentas) {
+        this.lineaVentas = lineaVentas;
+    }
 }

@@ -18,12 +18,7 @@ public class ValueMapper {
         return compra;
     }
 
-    public static CompraDto converToDto(Compra compra){
-        CompraDto compraDto= new CompraDto();
-        compraDto.setFechaCreacion(compra.getFechaCreacion());
 
-        return compraDto;
-    }
 
     public static Venta convertToEntity(VentaDto ventaDto){
         Venta venta= new Venta();
@@ -31,8 +26,9 @@ public class ValueMapper {
         return venta;
     }
 
-    public static VentaDto converToDto(Venta venta){
+    public static VentaDto convertToDto(Venta venta){
         VentaDto ventaDto= new VentaDto();
+        ventaDto.setIdVenta(venta.getIdVenta());
         ventaDto.setFechaCreacion(venta.getFechaCreacion());
 
         return ventaDto;

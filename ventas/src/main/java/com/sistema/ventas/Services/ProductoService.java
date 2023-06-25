@@ -24,18 +24,14 @@ public class ProductoService {
     ProductoRepository productoRepository;
 
     public Producto createProducto(Producto producto) throws ServiceException{
-
-        try {
-            log.info("ProductoService:createProducto ejecucion iniciada.");
-            log.debug("VentaService:createNewVenta parametros {}", ValueMapper.jsonAsString(producto));
-            productoRepository.save(producto);
-            return producto;
+        log.info("ProductoService:createProducto ejecucion iniciada.");
+        Optional<Producto> findProducto= productoRepository.findByName(producto.getName());
+        if (findProducto.isPresent()){
+            throw  new ServiceException("el nombre del producto ya existe");
         }
-         catch (Exception ex) {
-            log.error("error lanzado:", ex.getMessage());
-            throw  new ServiceException("Ha ocurrido un problema al crear una venta en el servicio");
-        }
-
+        log.debug("VentaService:createNewVenta parametros {}", ValueMapper.jsonAsString(producto));
+        productoRepository.save(producto);
+        return producto;
     }
 
 
@@ -84,7 +80,7 @@ public class ProductoService {
     }
 
 
-    public void EliminarProducto(Long id_producto){
+    public void deleteProducto(Long id_producto){
         try {
             Optional<Producto> verificarProducto = productoRepository.findById(id_producto);
 
@@ -98,5 +94,35 @@ public class ProductoService {
             log.error("error lanzado:", ex.getMessage());
             throw new ServiceException("Ha ocurrido un problema al eliminar el producto");
         }
+    }
+
+
+    public Producto getProductoById(Long id_producto){
+        try {
+            Optional<Producto> verificarProducto = productoRepository.findById(id_producto);
+
+            if (verificarProducto.isPresent()) {
+
+                return verificarProducto.get();
+
+            } else {
+                throw new ServiceException("No existe el producto solicitado");
+            }
+        } catch (Exception ex){
+            log.error("error lanzado:", ex.getMessage());
+            throw new ServiceException("Ha ocurrido un problema al eliminar el producto");
+        }
+    }
+
+    public void EliminarProducto(Long id_producto){
+        Optional<Producto> verificarProducto = productoRepository.findById(id_producto);
+
+        if (verificarProducto.isPresent()) {
+            productoRepository.delete(verificarProducto.get());
+
+        } else {
+            throw new ServiceException("No existe el producto solicitado");
+        }
+
     }
 }

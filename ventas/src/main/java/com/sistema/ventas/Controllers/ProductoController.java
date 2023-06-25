@@ -63,7 +63,20 @@ public class ProductoController {
         ApiResponse<Producto> productoApiResponse = new ApiResponse<>(SUCCESS, nuevoProducto);
         log.info("productoController::updateProducto response {}", ValueMapper.jsonAsString(productoApiResponse));
 
-        return new ResponseEntity<>(productoApiResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/deleteProducto/{id_producto}")
+    public ResponseEntity<ApiResponse> updateProducto( @PathVariable Long id_producto) {
+
+        log.info("productoController::deleteProducto peticion iniciada con el id {}", ValueMapper.jsonAsString(id_producto));
+        productoService.EliminarProducto(id_producto);
+
+        ApiResponse<String> productoApiResponse = new ApiResponse<>(SUCCESS,"Producto eliminado");
+        log.info("productoController::deleteProducto respuesta {}", ValueMapper.jsonAsString(productoApiResponse));
+
+        return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);
 
     }
 }

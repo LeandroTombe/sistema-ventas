@@ -2,6 +2,8 @@ package com.sistema.ventas.Entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "linea_venta")
@@ -17,30 +19,37 @@ public class LineaVenta {
     @JoinColumn(name = "venta_id")
     private Venta venta;
 
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
 
-    private int cantidad;
+    @NotNull(message = "La cantidad no puede ser nula")
+    @Min(value = 1, message = "La cantidad de producto no puede ser menor a 0")
+    private Integer cantidad;
 
     @Column(name = "precio_unitario")
     private Double precioUnitario;
 
 
-    private LineaVenta() {
+    public LineaVenta() {
     }
 
-    public LineaVenta(Venta venta, int cantidad, Double precioUnitario) {
+    public LineaVenta(Venta venta, Integer cantidad, Double precioUnitario, Producto producto) {
         this.venta = venta;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
+        this.producto=producto;
     }
 
     public Long getNroLinea() {
         return nroLinea;
     }
 
+    public void setNroLinea(Long nroLinea) {
+        this.nroLinea = nroLinea;
+    }
 
     public Venta getVenta() {
         return venta;
@@ -50,11 +59,11 @@ public class LineaVenta {
         this.venta = venta;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -64,5 +73,13 @@ public class LineaVenta {
 
     public void setPrecioUnitario(Double precioUnitario) {
         this.precioUnitario = precioUnitario;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 }

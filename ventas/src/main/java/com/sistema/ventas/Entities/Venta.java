@@ -3,7 +3,9 @@ package com.sistema.ventas.Entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,17 +17,18 @@ public class Venta {
     private Long idVenta;
 
     @Column(name = "fecha_creacion")
-    private LocalDateTime fechaCreacion;
+    private LocalDate fechaCreacion;
 
-    @OneToMany(mappedBy = "venta")
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
     private List<LineaVenta> lineaVentas;
 
 
     public Venta() {
     }
 
-    public Venta(LocalDateTime fechaCreacion) {
+    public Venta(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+        lineaVentas= new ArrayList<>();
     }
 
     public Long getIdVenta() {
@@ -33,11 +36,11 @@ public class Venta {
     }
 
 
-    public LocalDateTime getFechaCreacion() {
+    public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+    public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 

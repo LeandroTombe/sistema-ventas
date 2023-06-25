@@ -17,20 +17,18 @@ public class LineaCompra {
     @JoinColumn(name = "compra_id")
     private Compra compra;
 
-    @OneToOne
-    @JoinColumn(name = "producto_id")
-    private Producto producto;
-
 
     private int cantidad;
 
     @Column(name = "precio_unitario")
     private double precioUnitario;
 
+    @OneToOne
+    private Producto producto;
 
 
 
-    private LineaCompra(){};
+    private LineaCompra(){}
 
 
     public LineaCompra(Compra compra, int cantidad, double precioUnitario) {

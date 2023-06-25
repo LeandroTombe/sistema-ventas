@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "producto")
@@ -16,6 +17,7 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProducto;
+
 
 
     @Length(max = 20, message = "El nombre del producto no puede exceder de 20 caracteres")
@@ -36,31 +38,16 @@ public class Producto {
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
 
+    public Producto() {
+    }
 
-
-
-    @OneToOne(mappedBy ="producto",cascade = CascadeType.ALL)
-    private LineaVenta lineaVenta;
-
-    @OneToOne(mappedBy ="producto", cascade = CascadeType.ALL)
-    private LineaCompra lineaCompra;
-
-    public Producto(String name, Integer stock, Double precioActual, LineaVenta lineaVenta, LineaCompra lineaCompra) {
+    public Producto(@NotNull(message = "El nombre no puede ser nulo") String name, @NotNull(message = "El stock no puede ser nulo") Integer stock, @NotNull(message = "el precio actual puede estar vacio") Double precioActual, LocalDateTime fechaActualizacion) {
         this.name = name;
         this.stock = stock;
         this.precioActual = precioActual;
-        this.lineaVenta = lineaVenta;
-        this.lineaCompra = lineaCompra;
+        this.fechaActualizacion = fechaActualizacion;
     }
 
-    public Producto(String name, Integer stock, Double precioActual) {
-        this.name = name;
-        this.stock = stock;
-        this.precioActual = precioActual;
-    }
-
-    private Producto() {
-    }
 
     public Long getIdProducto() {
         return idProducto;
@@ -99,19 +86,5 @@ public class Producto {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public LineaVenta getLineaVenta() {
-        return lineaVenta;
-    }
 
-    public void setLineaVenta(LineaVenta lineaVenta) {
-        this.lineaVenta = lineaVenta;
-    }
-
-    public LineaCompra getLineaCompra() {
-        return lineaCompra;
-    }
-
-    public void setLineaCompra(LineaCompra lineaCompra) {
-        this.lineaCompra = lineaCompra;
-    }
 }

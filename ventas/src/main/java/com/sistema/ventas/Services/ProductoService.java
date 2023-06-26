@@ -98,19 +98,21 @@ public class ProductoService {
 
 
     public Producto getProductoById(Long id_producto){
-        try {
-            Optional<Producto> verificarProducto = productoRepository.findById(id_producto);
+        Optional<Producto> verificarProducto = productoRepository.findById(id_producto);
+        if (verificarProducto.isPresent()) {
+            return verificarProducto.get();
+        } else {
+            throw new ServiceException("No existe el producto solicitado");
+        }
+    }
 
-            if (verificarProducto.isPresent()) {
 
-                return verificarProducto.get();
-
-            } else {
-                throw new ServiceException("No existe el producto solicitado");
-            }
-        } catch (Exception ex){
-            log.error("error lanzado:", ex.getMessage());
-            throw new ServiceException("Ha ocurrido un problema al eliminar el producto");
+    public Producto getProductoByNme(String nombreProducto){
+        Optional<Producto> verificarProducto = productoRepository.findByName(nombreProducto);
+        if (verificarProducto.isPresent()) {
+            return verificarProducto.get();
+        } else {
+            throw new ServiceException("No existe el producto solicitado con ese nombre");
         }
     }
 

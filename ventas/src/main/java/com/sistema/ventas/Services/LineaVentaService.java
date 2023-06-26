@@ -43,11 +43,11 @@ public class LineaVentaService {
     }
 
 
-    public LineaVenta crearLineaVenta(Long idProducto, Integer cantidad) throws ServiceException {
+    public LineaVenta crearLineaVenta(String nombreProducto, Integer cantidad) throws ServiceException {
         log.info("VentaService:crearLineaVenta ejecucion iniciada.");
-        log.debug("Busqueda del producto solicitado con id {}", ValueMapper.jsonAsString(idProducto));
+        log.debug("Busqueda del producto solicitado con nombre solicitado {}", ValueMapper.jsonAsString(nombreProducto));
 
-        Optional<Producto> findProducto = productoRepository.findById(idProducto);
+        Optional<Producto> findProducto = productoRepository.findByName(nombreProducto);
 
         if (findProducto.isPresent()) {
             Producto producto = findProducto.get();
@@ -69,11 +69,12 @@ public class LineaVentaService {
             lineaVenta.setPrecioUnitario(producto.getPrecioActual());
 
 
+
             log.info("VentaService:crearLineaVenta ejecucion finalizada.");
 
-            return lineaVenta;
+            return lineaVentaRepository.save(lineaVenta);
         } else {
-            throw new ServiceException("El producto con el id solicitado no existe");
+            throw new ServiceException("El producto con el nombre solicitado no existe");
         }
     }
 }

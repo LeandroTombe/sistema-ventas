@@ -79,4 +79,31 @@ public class ProductoController {
         return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);
 
     }
+
+
+    @GetMapping("/buscarProductoId/{id_producto}")
+    public ResponseEntity<ApiResponse> findProductById( @PathVariable Long id_producto) {
+
+        log.info("productoController::findProductById peticion iniciada con el id {}", ValueMapper.jsonAsString(id_producto));
+        Producto findProducto= productoService.getProductoById(id_producto);
+
+        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(SUCCESS,findProducto);
+        log.info("productoController::findProductById respuesta {}", ValueMapper.jsonAsString(productoApiResponse));
+
+        return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/buscarProductoNombre/{nombreProducto}")
+    public ResponseEntity<ApiResponse> findProductByName( @PathVariable String nombreProducto) {
+
+        log.info("productoController::findProductByName peticion iniciada con el nombre {}", ValueMapper.jsonAsString(nombreProducto));
+        Producto findProducto=productoService.getProductoByNme(nombreProducto);
+
+        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(SUCCESS,findProducto);
+        log.info("productoController::findProductByName respuesta {}", ValueMapper.jsonAsString(productoApiResponse));
+
+        return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);
+
+    }
 }

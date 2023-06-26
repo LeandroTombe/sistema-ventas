@@ -1,6 +1,7 @@
 package com.sistema.ventas.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,16 +20,18 @@ public class Venta {
     @Column(name = "fecha_creacion")
     private LocalDate fechaCreacion;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
     private List<LineaVenta> lineaVentas;
 
 
-    public Venta() {
+    private Venta() {
+
     }
 
     public Venta(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
-        lineaVentas= new ArrayList<>();
+        this.lineaVentas=new ArrayList<>();
     }
 
     public Long getIdVenta() {

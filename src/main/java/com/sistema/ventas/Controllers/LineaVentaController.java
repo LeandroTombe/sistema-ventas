@@ -48,9 +48,9 @@ public class LineaVentaController {
     public ResponseEntity<ApiResponse> crearLineaVenta(@RequestParam String nombreProducto, @RequestParam Integer cantidad) throws ServiceException{
         try {
         log.info("LineaVentaController::crearLineaVenta cantidad y nombre {} {}",ValueMapper.jsonAsString(nombreProducto),  ValueMapper.jsonAsString(cantidad));
-        LineaVenta lineaVenta1= lineaVentaService.crearLineaVenta(nombreProducto,cantidad);
+        LineaVenta lineaVenta= lineaVentaService.crearLineaVenta(nombreProducto,cantidad);
 
-        ApiResponse<LineaVenta> lineaVentaApiResponse= new ApiResponse<>(SUCCESS,lineaVenta1);
+        ApiResponse<LineaVenta> lineaVentaApiResponse= new ApiResponse<>(SUCCESS,lineaVenta);
         log.info("productoController::createNewProducto respuesta {}", ValueMapper.jsonAsString(lineaVentaApiResponse));
         return new ResponseEntity<>(lineaVentaApiResponse, HttpStatus.CREATED);
 

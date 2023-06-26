@@ -1,6 +1,7 @@
 package com.sistema.ventas.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,8 @@ public class LineaVenta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nroLinea;
 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "venta_id")
     private Venta venta;

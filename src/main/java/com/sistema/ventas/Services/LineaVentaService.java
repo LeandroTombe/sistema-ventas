@@ -3,14 +3,17 @@ package com.sistema.ventas.Services;
 
 import com.sistema.ventas.Entities.LineaVenta;
 import com.sistema.ventas.Entities.Producto;
+import com.sistema.ventas.Entities.Venta;
 import com.sistema.ventas.Repositories.LineaVentaRepository;
 import com.sistema.ventas.Repositories.ProductoRepository;
 import com.sistema.ventas.Repositories.VentaRepository;
 import com.sistema.ventas.Utils.ValueMapper;
 import com.sistema.ventas.exception.ServiceException;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +46,7 @@ public class LineaVentaService {
     }
 
 
+    @Transactional
     public LineaVenta crearLineaVenta(String nombreProducto, Integer cantidad) throws ServiceException {
         log.info("VentaService:crearLineaVenta ejecucion iniciada.");
         log.debug("Busqueda del producto solicitado con nombre solicitado {}", ValueMapper.jsonAsString(nombreProducto));
@@ -69,8 +73,27 @@ public class LineaVentaService {
             lineaVenta.setPrecioUnitario(producto.getPrecioActual());
 
 
+            //creacion del venta;
+            Optional<Venta> venta=ventaService.findByFecha(LocalDate.now().minusDays(1));
+            /*
+            if (venta.isPresent()){
+                log.info("Agregando la linea de venta a una venta existente de la misma fecha");
+                ventaService.agregarLineaVenta(venta.get(),lineaVenta);
+
+            } */
+            if (venta.isEmpty()){
+                log.info("Creando una venta nueva de la fecha de hoy");
+                Venta newVenta = ventaService.createNewVenta(lineaVenta);
+                lineaVenta.setVenta(newVenta);
+            } else {
+                log.info("Agregando la linea de venta a una venta existente de la misma fecha");
+                Venta existVenta= venta.get();
+                lineaVenta.setVenta(existVenta);
+                existVenta.getLineaVentas().add(lineaVenta);
+            }
 
             log.info("VentaService:crearLineaVenta ejecucion finalizada.");
+
 
             return lineaVentaRepository.save(lineaVenta);
         } else {

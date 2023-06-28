@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  sistemaventadb:
+    image: mysql:latest
+    container_name: "sistemaventadb"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=sistema_venta
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - network
+  springboot-mysql:
+    image: springboot-mysql:latest
+    container_name: springboot-mysql
+    ports:
+      - "4000:4000"
+    links:
+      - sistemaventadb
+    networks:
+      - network
+volumes:
+  db_data:
+
+networks:
+  network:

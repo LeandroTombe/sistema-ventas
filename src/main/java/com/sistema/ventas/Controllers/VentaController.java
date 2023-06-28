@@ -3,6 +3,7 @@ package com.sistema.ventas.Controllers;
 
 
 import com.sistema.ventas.Dto.ApiResponse;
+import com.sistema.ventas.Dto.ReporteVentaDto;
 import com.sistema.ventas.Entities.Venta;
 import com.sistema.ventas.Services.VentaService;
 import com.sistema.ventas.Utils.ValueMapper;
@@ -43,7 +44,6 @@ public class VentaController {
 
 
     @GetMapping("/getVentas")
-    @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<ApiResponse> getVentas(){
 
         List<Venta> ventas= ventaService.getVentas();
@@ -53,6 +53,32 @@ public class VentaController {
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
 
     }
+
+    //obtener las fechas de una semana
+
+
+    @GetMapping("/getVentasByWeek")
+    public ResponseEntity<ApiResponse> getVentasByWeek(){
+
+        List<Venta> ventas= ventaService.getVentasByWeek();
+        ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(SUCCESS, ventas);
+        log.info("VentaController::getVentas response {}", ValueMapper.jsonAsString(ventaApiResponse));
+
+        return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/getGananciasByWeek")
+    public ResponseEntity<ApiResponse> getGananciasByWeek(){
+
+        ReporteVentaDto reporteVentaDto= ventaService.getGananciasByWeek();
+        ApiResponse<ReporteVentaDto> reporteVentaApiResponse= new ApiResponse<>(SUCCESS, reporteVentaDto);
+        log.info("VentaController::getGananciasByWeek response {}", ValueMapper.jsonAsString(reporteVentaApiResponse));
+
+        return new ResponseEntity<>(reporteVentaApiResponse, HttpStatus.OK);
+
+    }
+
 
 
 

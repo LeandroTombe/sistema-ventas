@@ -1,6 +1,7 @@
 package com.sistema.ventas.Services;
 
 
+import com.sistema.ventas.Dto.ReporteVentaDto;
 import com.sistema.ventas.Entities.LineaVenta;
 import com.sistema.ventas.Entities.Venta;
 import com.sistema.ventas.Repositories.LineaVentaRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +41,7 @@ public class VentaService {
         try {
 
             log.info("VentaService:createNewVenta ejecucion iniciada.");
-            Venta venta = new Venta(LocalDate.now().minusDays(1));
+            Venta venta = new Venta(LocalDate.now());
             venta.getLineaVentas().add(lineaVenta);
 
             log.info("VentaService:createNewVenta ejecucion finalizada.\n");
@@ -72,5 +74,57 @@ public class VentaService {
         log.info("VentaService:findByFecha ejecucion finalizada\n.");
         return Optional.ofNullable(findVenta.orElse(null));
     }
+
+    public List<Venta> getVentasByWeek(){
+        log.info("VentaService:getVentaByWeek ejecucion iniciada.");
+
+        List<Venta> ventasSemanaDiferencia = new ArrayList<>();
+        List<Venta> ventas = ventaRepository.findAll();
+        //fecha de hoy
+        LocalDate fechaActual = LocalDate.now();
+        //fecha de una semana
+        LocalDate fechaUnaSemanaAtras = fechaActual.minus(1, ChronoUnit.WEEKS);
+
+        for (Venta venta : ventas) {
+            LocalDate fechaVenta = venta.getFechaCreacion();
+            if (fechaVenta.isAfter(fechaUnaSemanaAtras) && fechaVenta.isBefore(fechaActual)) {
+                ventasSemanaDiferencia.add(venta);
+            }
+        }
+        log.info("VentaService:getVentaByWeek ejecucion finalizada.");
+        return ventasSemanaDiferencia;
+    }
+
+
+    public ReporteVentaDto getGananciasByWeek(){
+
+        List<Venta> ventas=getVentasByWeek();
+        ReporteVentaDto reporteVentaDto= new ReporteVentaDto();
+
+
+        Double total=0.0;
+        Integer cantidad=0;
+        for (Venta venta:ventas) {
+
+            reporteVentaDto.getVenta().add(venta);
+            List<LineaVenta> lineaVentas=venta.getLineaVentas();
+            for (LineaVenta lineaventa:lineaVentas) {
+
+                total+=(lineaventa.getPrecioUnitario()* lineaventa.getCantidad());
+                cantidad +=lineaventa.getCantidad();
+            }
+        }
+
+        reporteVentaDto.setCantidad(cantidad);
+        reporteVentaDto.setGananciaTotal(total);
+
+        return reporteVentaDto;
+
+    }
+
+
+
+
+
 
 }

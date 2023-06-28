@@ -74,13 +74,8 @@ public class LineaVentaService {
 
 
             //creacion del venta;
-            Optional<Venta> venta=ventaService.findByFecha(LocalDate.now().minusDays(1));
-            /*
-            if (venta.isPresent()){
-                log.info("Agregando la linea de venta a una venta existente de la misma fecha");
-                ventaService.agregarLineaVenta(venta.get(),lineaVenta);
+            Optional<Venta> venta=ventaService.findByFecha(LocalDate.now());
 
-            } */
             if (venta.isEmpty()){
                 log.info("Creando una venta nueva de la fecha de hoy");
                 Venta newVenta = ventaService.createNewVenta(lineaVenta);
@@ -92,7 +87,7 @@ public class LineaVentaService {
                 existVenta.getLineaVentas().add(lineaVenta);
             }
 
-            log.info("VentaService:crearLineaVenta ejecucion finalizada.");
+            log.info("VentaService:crearLineaVenta ejecucion finalizada.\n");
 
 
             return lineaVentaRepository.save(lineaVenta);

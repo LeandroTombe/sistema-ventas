@@ -1,6 +1,7 @@
 package com.sistema.ventas.Controllers;
 
 import com.sistema.ventas.Dto.ApiResponse;
+import com.sistema.ventas.Dto.NameEmailUserDto;
 import com.sistema.ventas.Entities.Enums.Role;
 import com.sistema.ventas.Entities.UserInfo;
 import com.sistema.ventas.Services.UserInfoDetailService;
@@ -9,10 +10,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -39,5 +39,12 @@ public class authController {
             ApiResponse<String> errorResponse = new ApiResponse<>(ERROR, ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
+    }
+
+    @GetMapping("/getUsers")
+    public ResponseEntity<?> getUsers() {
+        List<NameEmailUserDto> usuarios= userInfoDetailService.getUsuarios();
+        ApiResponse<List<NameEmailUserDto>> userInfoApiResponse = new ApiResponse<>(SUCCESS, usuarios);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userInfoApiResponse);
     }
 }

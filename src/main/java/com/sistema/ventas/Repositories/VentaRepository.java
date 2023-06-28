@@ -15,4 +15,6 @@ public interface VentaRepository extends JpaRepository<Venta,Long> {
 
     Optional<Venta> findByfechaCreacion(LocalDate fecha);
 
+
+
 }

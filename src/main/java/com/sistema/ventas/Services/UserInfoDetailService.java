@@ -1,6 +1,7 @@
 package com.sistema.ventas.Services;
 
 import com.sistema.ventas.Config.UserInfoUserDetails;
+import com.sistema.ventas.Dto.NameEmailUserDto;
 import com.sistema.ventas.Entities.UserInfo;
 import com.sistema.ventas.Repositories.UserInfoRepository;
 import com.sistema.ventas.Utils.ValueMapper;
@@ -13,7 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -51,5 +54,22 @@ public class UserInfoDetailService implements UserDetailsService {
             log.debug("UserService:addUser devolviendo usuario creado de la base de datos {}", ValueMapper.jsonAsString(savedUserInfo));
             return savedUserInfo;
         }
+    }
+
+    public List<NameEmailUserDto> getUsuarios(){
+        log.info("UsuarioService:getUsuarios ejecucion iniciada.");
+
+        List<UserInfo> usuarios= userInfoRepository.findAll();
+
+        List<NameEmailUserDto> usuariosDto= usuarios.stream().map(usuario-> {
+            NameEmailUserDto nameEmailUserDto= new NameEmailUserDto();
+            nameEmailUserDto.setName(usuario.getName());
+            nameEmailUserDto.setEmail(usuario.getEmail());
+            return nameEmailUserDto;
+        }).collect(Collectors.toList());
+        log.info("UsuarioService:getUsuarios ejecucion finalizada.");
+
+        return  usuariosDto;
+
     }
 }

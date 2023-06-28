@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.sistema.ventas.VentasApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.19 s - in com.sistema.ventas.VentasApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.58 s - in com.sistema.ventas.VentasApplicationTests

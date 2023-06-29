@@ -10,6 +10,7 @@
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/ApiResponse.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/LineaVentaRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Services/ProductoService.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/ReporteVentaDto.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/exception/GlobalExceptionHandler.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/VentaRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Config/SecurityConfig.java
@@ -27,3 +28,4 @@
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Services/VentaService.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Entities/LineaCompra.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Controllers/VentaController.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/NameEmailUserDto.java

@@ -31,7 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf ->csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/ventas/createVenta").authenticated()
+                        //.requestMatchers("/api/ventas/createVenta").authenticated()
                         //.requestMatchers("/api/ventas/getVentas").hasAuthority(Role.CLIENTE.name())
                         .anyRequest().permitAll())
                 .formLogin(form -> form.permitAll());

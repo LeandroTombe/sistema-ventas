@@ -1,0 +1,9 @@
+creamos el proyecto:
+mvn clean install
+
+Construyo el docker:
+docker build -t myappspring:1.0 .
+
+
+Ejecutar este comando:
+docker run --net=host -p 8080:8080 myappspring:1.0

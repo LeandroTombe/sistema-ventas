@@ -4,6 +4,7 @@ package com.sistema.ventas.Controllers;
 
 import com.sistema.ventas.Dto.ApiResponse;
 import com.sistema.ventas.Dto.ReporteVentaDto;
+import com.sistema.ventas.Entities.LineaVenta;
 import com.sistema.ventas.Entities.Venta;
 import com.sistema.ventas.Services.VentaService;
 import com.sistema.ventas.Utils.ValueMapper;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/ventas")
@@ -27,20 +29,7 @@ public class VentaController {
 
     @Autowired
     VentaService ventaService;
-    /*
-    @PostMapping("/createVenta")
-    public ResponseEntity<ApiResponse> createNewVenta(@RequestBody @Valid Venta venta) {
 
-        log.info("VentaController::createNewVenta request body {}", ValueMapper.jsonAsString(venta));
-        Venta newVenta = ventaService.createNewVenta(venta);
-
-        ApiResponse<Venta> ventaApiResponse = new ApiResponse<>(SUCCESS, newVenta);
-        log.info("VentaController::createNewVenta response {}", ValueMapper.jsonAsString(ventaApiResponse));
-
-        return new ResponseEntity<>(ventaApiResponse, HttpStatus.CREATED);
-
-    }
-    */
 
 
     @GetMapping("/getVentas")
@@ -76,6 +65,15 @@ public class VentaController {
         log.info("VentaController::getGananciasByWeek response {}", ValueMapper.jsonAsString(reporteVentaApiResponse));
 
         return new ResponseEntity<>(reporteVentaApiResponse, HttpStatus.OK);
+
+    }
+
+    @PostMapping("/createVenta")
+    public ResponseEntity<ApiResponse> createVenta(@RequestBody @Valid Map<String,Integer> mapeoLineaVentas){
+
+        Venta newVenta= ventaService.createVenta(mapeoLineaVentas);
+        ApiResponse<Venta> ventaApiResponse= new ApiResponse<>(SUCCESS, newVenta);
+        return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
 
     }
 

@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -27,13 +28,13 @@ public class VentaService {
     //inyeccion de dependecias
 
     private  VentaRepository ventaRepository;
-    private LineaVentaRepository lineaVentaRepository;
+
+    private LineaVentaService lineaVentaService;
 
 
-
-    public VentaService(VentaRepository ventaRepository,LineaVentaRepository lineaVentaRepository,ProductoRepository productoRepository){
+    public VentaService(VentaRepository ventaRepository,LineaVentaService lineaVentaService){
+        this.lineaVentaService=lineaVentaService;
         this.ventaRepository=ventaRepository;
-        this.lineaVentaRepository=lineaVentaRepository;
     }
 
     //crear un venta
@@ -75,26 +76,24 @@ public class VentaService {
         return Optional.ofNullable(findVenta.orElse(null));
     }
 
-    public List<Venta> getVentasByWeek(){
+    public List<Venta> getVentasByWeek() {
         log.info("VentaService:getVentaByWeek ejecucion iniciada.");
 
         List<Venta> ventasSemanaDiferencia = new ArrayList<>();
         List<Venta> ventas = ventaRepository.findAll();
-        //fecha de hoy
         LocalDate fechaActual = LocalDate.now();
-        //fecha de una semana
         LocalDate fechaUnaSemanaAtras = fechaActual.minus(1, ChronoUnit.WEEKS);
 
         for (Venta venta : ventas) {
             LocalDate fechaVenta = venta.getFechaCreacion();
-            if (fechaVenta.isAfter(fechaUnaSemanaAtras) && fechaVenta.isBefore(fechaActual)) {
+            if (!fechaVenta.isBefore(fechaUnaSemanaAtras) && !fechaVenta.isAfter(fechaActual)) {
                 ventasSemanaDiferencia.add(venta);
             }
         }
+
         log.info("VentaService:getVentaByWeek ejecucion finalizada.");
         return ventasSemanaDiferencia;
     }
-
 
     public ReporteVentaDto getGananciasByWeek(){
 
@@ -119,10 +118,23 @@ public class VentaService {
         reporteVentaDto.setGananciaTotal(total);
 
         return reporteVentaDto;
-
     }
 
+    public Venta createVenta(Map<String,Integer> mapeoProducto){
 
+        log.info("VentaService:createVenta ejecucion iniciada.");
+        Venta newVenta= new Venta(LocalDate.now());
+
+        List<LineaVenta> lineaVentas=lineaVentaService.crearLineasVentas(mapeoProducto);
+
+        // Asignar la venta a cada línea de venta
+        lineaVentas.forEach(lineaVenta -> lineaVenta.setVenta(newVenta));
+
+        newVenta.setLineaVentas(lineaVentas);
+        log.info("VentaService:createVenta ejecucion finalizada.");
+
+        return ventaRepository.save(newVenta);
+    }
 
 
 

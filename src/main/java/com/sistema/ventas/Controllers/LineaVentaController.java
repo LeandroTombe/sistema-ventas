@@ -5,6 +5,7 @@ import com.sistema.ventas.Entities.Enums.Role;
 import com.sistema.ventas.Entities.LineaVenta;
 import com.sistema.ventas.Entities.Producto;
 import com.sistema.ventas.Entities.UserInfo;
+import com.sistema.ventas.Entities.Venta;
 import com.sistema.ventas.Services.LineaVentaService;
 import com.sistema.ventas.Utils.ValueMapper;
 import com.sistema.ventas.exception.ServiceException;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -59,5 +61,23 @@ public class LineaVentaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
+    /*
+    @PostMapping("/createLineaVenta")
+    public ResponseEntity<ApiResponse> crearLineaVenta(@RequestParam Long idProducto, @RequestParam Integer cantidad) throws ServiceException{
+        try {
+            log.info("LineaVentaController::crearLineaVenta cantidad y nombre {} {}",ValueMapper.jsonAsString(idProducto),  ValueMapper.jsonAsString(cantidad));
+            LineaVenta lineaVenta= lineaVentaService.crearLineaVenta(idProducto,cantidad);
+
+            ApiResponse<LineaVenta> lineaVentaApiResponse= new ApiResponse<>(SUCCESS,lineaVenta);
+            log.info("productoController::createNewProducto respuesta {}", ValueMapper.jsonAsString(lineaVentaApiResponse));
+            return new ResponseEntity<>(lineaVentaApiResponse, HttpStatus.CREATED);
+
+        } catch (ServiceException ex) {
+            ApiResponse<String> errorResponse = new ApiResponse<>(ERROR, ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
+    }
+    */
+
 
 }

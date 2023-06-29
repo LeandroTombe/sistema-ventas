@@ -7,10 +7,12 @@ com/sistema/ventas/Entities/Venta.class
 com/sistema/ventas/Utils/ValueMapper.class
 com/sistema/ventas/Config/UserInfoUserDetails.class
 com/sistema/ventas/Entities/Producto.class
+com/sistema/ventas/Dto/ReporteVentaDto.class
 com/sistema/ventas/exception/ServiceException.class
 com/sistema/ventas/exception/GlobalExceptionHandler.class
 com/sistema/ventas/Services/LineaVentaService.class
 com/sistema/ventas/Controllers/VentaController.class
+com/sistema/ventas/Dto/NameEmailUserDto.class
 com/sistema/ventas/Dto/ApiResponse.class
 com/sistema/ventas/Services/ProductoService.class
 com/sistema/ventas/Services/VentaService.class

@@ -9,8 +9,7 @@ Proyecto realizado con java, usando el framework spring boot y una base de datos
 ## Modo de ejecucion:
 Debemos tener instalado docker en nuestro sistema operativo
 
-1) primer paso es ejecutar un comando que nos permite construir, a traves de docker, un ejecutable de java y exponerlo en un puerto cualquiera, en este caso, elegi el 4000
-elegimos usar "." como busqueda del Dockerfile, para esto esto sea efectivo, debemos posicionarnos en la carpeta sistemas-ventas
+1) primer paso es ejecutar un comando que nos permite construir, a traves de docker, un ejecutable de java y exponerlo en un puerto cualquiera, en este caso, elegi el puerto 4000 el "." del final nos buscara dentro del directo el Dockerfile, para esto esto sea efectivo, debemos posicionarnos en la carpeta sistemas-ventas
 
 ```shell
 docker build -t sistemav2 .

@@ -6,6 +6,12 @@ Proyecto realizado con java, usando el framework spring boot y una base de datos
 ![Screenshot from 2023-06-30 16-30-57](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/f23ac02b-8c3f-4786-8388-f01271dc7df1)
 
 
+# Componentes Spring
+Nuestros componentes principales se etiquetarán con @ para que el framework Spring lo reconozca. Cada uno tiene una misión en nuestra arquitectura:
+![components](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/ae02dd12-6496-4c05-b321-d7955ea455e2)
+
+
+
 ## Modo de ejecucion:
 Debemos tener instalado docker en nuestro sistema operativo
 

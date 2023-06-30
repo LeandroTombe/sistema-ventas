@@ -10,7 +10,20 @@ Proyecto realizado con java, usando el framework spring boot y una base de datos
 Nuestros componentes principales se etiquetarán con @ para que el framework Spring lo reconozca. Cada uno tiene una misión en nuestra arquitectura:
 ![components](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/ae02dd12-6496-4c05-b321-d7955ea455e2)
 
+Controladores
+Se etiquetan como @Controller o en nuestro caso al ser una API REST como @RestController. Estos son los controladores que se encargan de recibir las peticiones de los usuarios y devolver respuestas.
 
+Servicios
+Se etiquetan como @Service. Se encargan de implementar la parte de negocio o infraestructura. En nuestro caso puede ser el sistema de almacenamiento o parte de la seguridad y perfiles de usuario.
+
+Repositorios
+Se etiquetan como @Repository e implementan la interfaz y operaciones de persistencia de la información. En nuestro caso, puede ser una base de datos o una API externa. Podemos extender de repositorios pre establecidos o diseñar el nuestro propio.
+
+Configuración
+Se etiquetan como @Configuration. Se encargan de configurar los componentes de la aplicación. Se se suelen iniciar al comienzo de nuestra aplicación.
+
+Bean
+La anotación @Bean, nos sirve para indicar que este bean será administrado por Spring Boot (Spring Container). La administración de estos beans se realiza mediante a anotaciones como @Configuration.
 
 ## Modo de ejecucion:
 Debemos tener instalado docker en nuestro sistema operativo
@@ -34,79 +47,79 @@ Si todo se ejecuto de forma correcta, nos tiene que salir el puerto donde se pue
 # Listado de endpoints, de cada modelo/entidad
 
 ## VENTAS
-#### peticion: CREAR UNA VENTA
+peticion: CREAR UNA VENTA
 - `http://localhost:4000/api/ventas/createVenta` -
 se crea una venta, con sus respecitvas lineas de ventas asociadas y con la fecha que se realizo. Por ejemplo, si solictamos un producto llamado "caramelo", debemos  tambien agregar la cantidad que necesitamos. Este endpoint creara automaticamente las lineas de ventas con el producto y cantidad respectivamente, descontando del mismo su stock
 - hay que tener en cuenta que el producto debe existir y la cantidad solicitada debe ser menor al que tiene en stock
 ![Screenshot from 2023-06-30 16-29-05](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/c04b1c70-a8bc-430d-a92f-2784b042066d)
 
-#### peticion: OBTENER TODAS LAS VENTAS
+peticion: OBTENER TODAS LAS VENTAS
 - `http://localhost:4000/api/ventas/getVentas`
 Se visualizan todas las ventas realizadas desde el primer dia que se inicio la aplicacion
 
-#### peticion: VISUALIZAR VENTAS DE UNA SEMANA
+peticion: VISUALIZAR VENTAS DE UNA SEMANA
 - `http://localhost:4000/api/ventas/getVentasByWeek`
 Se visualizan las ventas de hoy hasta una semana de diferencia
 
-#### peticion: VISUALIZAR GANANCIAS DE UNA SEMANA
+peticion: VISUALIZAR GANANCIAS DE UNA SEMANA
 - `http://localhost:4000/api/ventas/getVentasByWeek`
 Se visualizan las ventas de hoy hasta una semana de diferencia, obteniendo la cantidad vendida de cualquier producto y sus respectivas ganancias
 
 ## COMPRAS
 
-#### peticion: CREAR UNA COMPRA
+peticion: CREAR UNA COMPRA
 - `http://localhost:4000/api/compras/createCompra` -
 se crea una compra, con sus respecitvas lineas de compras asociadas y con la fecha que se realizo. Por ejemplo, si solictamos un producto llamado "chocolate", debemos tambien agregar la cantidad que necesitamos. Este endpoint creara automaticamente las lineas de ventas con el producto y cantidad respectivamente, sumando al  stock del producto solicitado
 - hay que tener en cuenta que el producto debe existir
 
-#### peticion: OBTENER TODAS LAS COMPRAS
+peticion: OBTENER TODAS LAS COMPRAS
 - `http://localhost:4000/api/compras/getCompras`
 Se visualizan todas las ventas realizadas desde el primer dia que se inicio la aplicacion
 
 
-#### peticion: VISUALIZAR PERDIDAS(compradas a un prooveedor) DE UNA SEMANA
+peticion: VISUALIZAR PERDIDAS(compradas a un prooveedor) DE UNA SEMANA
 - `http://localhost:4000/api/compras/getGananciasByWeek`
 Se visualizan las compras de hoy hasta una semana de diferencia, obteniendo la cantidad comprada de cualquier producto y sus respecivas peridas
 
 
 ## PRODUCTOS
 
-#### peticion: OBTENER TODOS LOS PRODUCTOS
+peticion: OBTENER TODOS LOS PRODUCTOS
 - `http://localhost:4000/api/productos/getProductos`
 Se visualizan todas las compras realizadas desde el primer dia que se inicio la aplicacion
 
 
-#### peticion: CREAR UN PRODUCTO
+peticion: CREAR UN PRODUCTO
 -`http://localhost:4000/api/productos/createProducto`
 Este metodo se necesita enviar como atributo "name,precio,Actualstock" para poder realizar de forma correcta su creacion
 Caso que no se envie esos atributos al body, saltara un mensaje de error 400 "bad request "solitando que ingrese cualquiera de estos campos
 ![image](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/dc31dace-6e9f-4534-9e9a-a695eb193d1d)
 
-#### peticion: ACTUALIZAR UN PRODUCTO POR ID
+peticion: ACTUALIZAR UN PRODUCTO POR ID
 -`http://localhost:4000/api/productos/updateProducto/:id`
 Se encarga de actualizar un producto enviando en la peticion un id de un producto existente y cualquiera de estos atributos para actualizar :"name, precio,Actualstock"
 Caso que no exista el producto o se ingrese un atributo no valido, nos dara un error 400 "Bad request" 
 
-#### peticion : BUSCAR UN PRODUCTO POR NOMBRE
+peticion : BUSCAR UN PRODUCTO POR NOMBRE
 -`http://localhost:4000/api/productos/buscarProductoNombre/:nombreProducto`
 Se encarga de buscar un producto enviando en la peticion un nombre de un producto existente
 Caso que no exista el producto nos dara un error 400 "Bad request"
 
-#### peticion : BUSCAR UN PRODUCTO POR ID
+peticion : BUSCAR UN PRODUCTO POR ID
 -`http://localhost:4000/api/productos/buscarProductoId/:id`
 Se encarga de buscar un producto enviando en la peticion un id de un producto existente
 Caso que no exista el producto nos dara un error 400 "Bad request"
 
 ## LINEA DE VENTA
 
-#### peticion: OBTENER TODAS LAS LINEAS DE VENTA
+peticion: OBTENER TODAS LAS LINEAS DE VENTA
 -`http://localhost:4000/api/lineaVentas/getLineaVentas`
 Se visualizan todas las lineas de ventas realizadas desde el primer dia que se inicio la aplicacion
 
 
 ## LINEA DE COMPRA
 
-#### peticion: OBTENER TODAS LAS LINEAS DE COMPRA
+peticion: OBTENER TODAS LAS LINEAS DE COMPRA
 -`http://localhost:4000/api/Lineacompras/getLineaCompras`
 Se visualizan todas las lineas de compras realizadas desde el primer dia que se inicio la aplicacion
 
@@ -114,12 +127,12 @@ Se visualizan todas las lineas de compras realizadas desde el primer dia que se 
 
 ## USUARIO
 
-#### peticion: OBTENER TODOS LOS USUARIOS
+peticion: OBTENER TODOS LOS USUARIOS
 -`http://localhost:4000/api/auth/getUsers`
 Se visualizan todas los usuarios creados desde el primer dia que se inicio la aplicacion
 
 
-#### peticion: CREAR UN USUARIO
+peticion: CREAR UN USUARIO
 
 -`http://localhost:4000/api/auth/createUser`
 Se encargar de crear un usuario recibiendo como parametro del body: "name", "password", "email"

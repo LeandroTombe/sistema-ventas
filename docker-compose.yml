@@ -3,6 +3,8 @@ services:
   mysql:
     image: mysql:8.0
     restart: always
+    ports:
+      - 3307:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: sistema_venta
@@ -14,7 +16,7 @@ services:
     ports:
       - 4000:4000
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sistema_venta
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/sistema_venta
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     depends_on:

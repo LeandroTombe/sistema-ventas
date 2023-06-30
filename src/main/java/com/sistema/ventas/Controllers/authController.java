@@ -19,7 +19,6 @@ import java.util.List;
 public class authController {
 
 
-    public static final String SUCCESS = "Success";
     public static final String ERROR = "Error";
 
 
@@ -30,13 +29,12 @@ public class authController {
     @PostMapping("/createUser")
     public ResponseEntity<?> addNewUser(@RequestBody @Valid UserInfo userInfo) {
         try {
-            userInfo.setRoles(Role.CLIENTE);
             UserInfo user = userInfoDetailService.addUser(userInfo);
             System.out.println(user);
-            ApiResponse<UserInfo> userInfoApiResponse = new ApiResponse<>(SUCCESS, user);
+            ApiResponse<UserInfo> userInfoApiResponse = new ApiResponse<>(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(userInfoApiResponse);
         } catch (ServiceException ex) {
-            ApiResponse<String> errorResponse = new ApiResponse<>(ERROR, ex.getMessage());
+            ApiResponse<String> errorResponse = new ApiResponse<>(ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
@@ -44,7 +42,7 @@ public class authController {
     @GetMapping("/getUsers")
     public ResponseEntity<?> getUsers() {
         List<NameEmailUserDto> usuarios= userInfoDetailService.getUsuarios();
-        ApiResponse<List<NameEmailUserDto>> userInfoApiResponse = new ApiResponse<>(SUCCESS, usuarios);
+        ApiResponse<List<NameEmailUserDto>> userInfoApiResponse = new ApiResponse<>(usuarios);
         return ResponseEntity.status(HttpStatus.CREATED).body(userInfoApiResponse);
     }
 }

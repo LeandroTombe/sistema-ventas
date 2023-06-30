@@ -2,6 +2,7 @@ package com.sistema.ventas.Services;
 
 import com.sistema.ventas.Config.UserInfoUserDetails;
 import com.sistema.ventas.Dto.NameEmailUserDto;
+import com.sistema.ventas.Entities.Enums.Role;
 import com.sistema.ventas.Entities.UserInfo;
 import com.sistema.ventas.Repositories.UserInfoRepository;
 import com.sistema.ventas.Utils.ValueMapper;
@@ -50,6 +51,7 @@ public class UserInfoDetailService implements UserDetailsService {
             throw new ServiceException("El usuario ya existe");
         } else {
             userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+            userInfo.setRoles(Role.CLIENTE);
             UserInfo savedUserInfo = userInfoRepository.save(userInfo);
             log.debug("UserService:addUser devolviendo usuario creado de la base de datos {}", ValueMapper.jsonAsString(savedUserInfo));
             return savedUserInfo;

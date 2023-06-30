@@ -12,7 +12,6 @@ public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long userId;
 
 
@@ -26,7 +25,7 @@ public class UserInfo {
     @NotNull(message = "El password no debe ser nulo")
     private String password;
 
-    @Enumerated(value = EnumType.STRING)
+    //@Enumerated(value = EnumType.STRING)
     private Role roles;
 
 

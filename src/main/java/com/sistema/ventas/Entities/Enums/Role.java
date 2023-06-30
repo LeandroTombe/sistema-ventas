@@ -2,7 +2,9 @@ package com.sistema.ventas.Entities.Enums;
 
 public enum Role {
     ADMIN("ROLE_ADMIN"),
-    CLIENTE("ROLE_CLIENTE");
+    CLIENTE("ROLE_CLIENTE"),
+
+    PROVEEDOR("ROLE_PROVEEDOR");
 
     private final String authority;
 

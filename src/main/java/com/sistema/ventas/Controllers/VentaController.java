@@ -25,7 +25,6 @@ import java.util.Map;
 @Slf4j
 public class VentaController {
 
-    public static final String SUCCESS = "Success";
 
     @Autowired
     VentaService ventaService;
@@ -36,7 +35,7 @@ public class VentaController {
     public ResponseEntity<ApiResponse> getVentas(){
 
         List<Venta> ventas= ventaService.getVentas();
-        ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(SUCCESS, ventas);
+        ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(ventas);
         log.info("VentaController::getVentas response {}", ValueMapper.jsonAsString(ventaApiResponse));
 
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
@@ -50,7 +49,7 @@ public class VentaController {
     public ResponseEntity<ApiResponse> getVentasByWeek(){
 
         List<Venta> ventas= ventaService.getVentasByWeek();
-        ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(SUCCESS, ventas);
+        ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(ventas);
         log.info("VentaController::getVentas response {}", ValueMapper.jsonAsString(ventaApiResponse));
 
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
@@ -61,7 +60,7 @@ public class VentaController {
     public ResponseEntity<ApiResponse> getGananciasByWeek(){
 
         ReporteVentaDto reporteVentaDto= ventaService.getGananciasByWeek();
-        ApiResponse<ReporteVentaDto> reporteVentaApiResponse= new ApiResponse<>(SUCCESS, reporteVentaDto);
+        ApiResponse<ReporteVentaDto> reporteVentaApiResponse= new ApiResponse<>(reporteVentaDto);
         log.info("VentaController::getGananciasByWeek response {}", ValueMapper.jsonAsString(reporteVentaApiResponse));
 
         return new ResponseEntity<>(reporteVentaApiResponse, HttpStatus.OK);
@@ -70,9 +69,8 @@ public class VentaController {
 
     @PostMapping("/createVenta")
     public ResponseEntity<ApiResponse> createVenta(@RequestBody @Valid Map<String,Integer> mapeoLineaVentas){
-
         Venta newVenta= ventaService.createVenta(mapeoLineaVentas);
-        ApiResponse<Venta> ventaApiResponse= new ApiResponse<>(SUCCESS, newVenta);
+        ApiResponse<Venta> ventaApiResponse= new ApiResponse<>(newVenta);
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
 
     }

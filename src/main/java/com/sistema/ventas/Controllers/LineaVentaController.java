@@ -26,8 +26,7 @@ import java.util.Map;
 
 public class LineaVentaController {
 
-    public static final String SUCCESS = "Success";
-    public static final String ERROR = "Error";
+
 
     private LineaVentaService lineaVentaService;
 
@@ -39,7 +38,7 @@ public class LineaVentaController {
     @GetMapping("/getLineaVentas")
     public ResponseEntity<ApiResponse> getLineaVentas(){
         List<LineaVenta> productos= lineaVentaService.getLineaVentas();
-        ApiResponse<List<LineaVenta>> ventaApiResponse= new ApiResponse<>(SUCCESS, productos);
+        ApiResponse<List<LineaVenta>> ventaApiResponse= new ApiResponse<>(productos);
         log.info("LineaVentaController::getLineaVentas response {}", ValueMapper.jsonAsString(ventaApiResponse));
 
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
@@ -52,32 +51,16 @@ public class LineaVentaController {
         log.info("LineaVentaController::crearLineaVenta cantidad y nombre {} {}",ValueMapper.jsonAsString(nombreProducto),  ValueMapper.jsonAsString(cantidad));
         LineaVenta lineaVenta= lineaVentaService.crearLineaVenta(nombreProducto,cantidad);
 
-        ApiResponse<LineaVenta> lineaVentaApiResponse= new ApiResponse<>(SUCCESS,lineaVenta);
+        ApiResponse<LineaVenta> lineaVentaApiResponse= new ApiResponse<>(lineaVenta);
         log.info("productoController::createNewProducto respuesta {}", ValueMapper.jsonAsString(lineaVentaApiResponse));
         return new ResponseEntity<>(lineaVentaApiResponse, HttpStatus.CREATED);
 
         } catch (ServiceException ex) {
-            ApiResponse<String> errorResponse = new ApiResponse<>(ERROR, ex.getMessage());
+            ApiResponse<String> errorResponse = new ApiResponse<>(ex.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
-    /*
-    @PostMapping("/createLineaVenta")
-    public ResponseEntity<ApiResponse> crearLineaVenta(@RequestParam Long idProducto, @RequestParam Integer cantidad) throws ServiceException{
-        try {
-            log.info("LineaVentaController::crearLineaVenta cantidad y nombre {} {}",ValueMapper.jsonAsString(idProducto),  ValueMapper.jsonAsString(cantidad));
-            LineaVenta lineaVenta= lineaVentaService.crearLineaVenta(idProducto,cantidad);
 
-            ApiResponse<LineaVenta> lineaVentaApiResponse= new ApiResponse<>(SUCCESS,lineaVenta);
-            log.info("productoController::createNewProducto respuesta {}", ValueMapper.jsonAsString(lineaVentaApiResponse));
-            return new ResponseEntity<>(lineaVentaApiResponse, HttpStatus.CREATED);
-
-        } catch (ServiceException ex) {
-            ApiResponse<String> errorResponse = new ApiResponse<>(ERROR, ex.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
-        }
-    }
-    */
 
 
 }

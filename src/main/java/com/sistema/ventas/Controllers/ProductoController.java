@@ -21,8 +21,6 @@ import java.util.List;
 @RequestMapping("api/productos")
 public class ProductoController {
 
-    public static final String SUCCESS = "Success";
-
 
     @Autowired
     ProductoService productoService;
@@ -32,7 +30,7 @@ public class ProductoController {
 
     public ResponseEntity<ApiResponse> getProductos(){
         List<Producto> productos= productoService.getProductos();
-        ApiResponse<List<Producto>> ventaApiResponse= new ApiResponse<>(SUCCESS, productos);
+        ApiResponse<List<Producto>> ventaApiResponse= new ApiResponse<>(productos);
         log.info("ProductController::getProducts response {}", ValueMapper.jsonAsString(ventaApiResponse));
 
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
@@ -47,7 +45,7 @@ public class ProductoController {
         producto.setFechaActualizacion(LocalDateTime.now());
         Producto nuevoProducto = productoService.createProducto(producto);
 
-        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(SUCCESS, producto);
+        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(producto);
         log.info("productoController::createNewProducto response {}", ValueMapper.jsonAsString(productoApiResponse));
 
         return new ResponseEntity<>(productoApiResponse, HttpStatus.CREATED);
@@ -60,7 +58,7 @@ public class ProductoController {
         log.info("productoController::updateProducto peticion iniciada con el id {}", ValueMapper.jsonAsString(id_producto));
         Producto nuevoProducto = productoService.updateProducto(id_producto,producto);
 
-        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(SUCCESS, nuevoProducto);
+        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(nuevoProducto);
         log.info("productoController::updateProducto response {}", ValueMapper.jsonAsString(productoApiResponse));
 
         return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);
@@ -73,7 +71,7 @@ public class ProductoController {
         log.info("productoController::deleteProducto peticion iniciada con el id {}", ValueMapper.jsonAsString(id_producto));
         productoService.EliminarProducto(id_producto);
 
-        ApiResponse<String> productoApiResponse = new ApiResponse<>(SUCCESS,"Producto eliminado");
+        ApiResponse<String> productoApiResponse = new ApiResponse<>("Producto eliminado");
         log.info("productoController::deleteProducto respuesta {}", ValueMapper.jsonAsString(productoApiResponse));
 
         return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);
@@ -87,7 +85,7 @@ public class ProductoController {
         log.info("productoController::findProductById peticion iniciada con el id {}", ValueMapper.jsonAsString(id_producto));
         Producto findProducto= productoService.getProductoById(id_producto);
 
-        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(SUCCESS,findProducto);
+        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(findProducto);
         log.info("productoController::findProductById respuesta {}", ValueMapper.jsonAsString(productoApiResponse));
 
         return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);
@@ -100,7 +98,7 @@ public class ProductoController {
         log.info("productoController::findProductByName peticion iniciada con el nombre {}", ValueMapper.jsonAsString(nombreProducto));
         Producto findProducto=productoService.getProductoByNme(nombreProducto);
 
-        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(SUCCESS,findProducto);
+        ApiResponse<Producto> productoApiResponse = new ApiResponse<>(findProducto);
         log.info("productoController::findProductByName respuesta {}", ValueMapper.jsonAsString(productoApiResponse));
 
         return new ResponseEntity<>(productoApiResponse, HttpStatus.OK);

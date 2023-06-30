@@ -23,8 +23,7 @@ public class ApiResponse<T> {
         this.results = results;
     }
 
-    public ApiResponse(String status, T results) {
-        this.status = status;
+    public ApiResponse(T results) {
         this.results = results;
     }
 

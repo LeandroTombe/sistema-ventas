@@ -96,11 +96,8 @@ public class VentaService {
     }
 
     public ReporteVentaDto getGananciasByWeek(){
-
         List<Venta> ventas=getVentasByWeek();
         ReporteVentaDto reporteVentaDto= new ReporteVentaDto();
-
-
         Double total=0.0;
         Integer cantidad=0;
         for (Venta venta:ventas) {
@@ -113,7 +110,6 @@ public class VentaService {
                 cantidad +=lineaventa.getCantidad();
             }
         }
-
         reporteVentaDto.setCantidad(cantidad);
         reporteVentaDto.setGananciaTotal(total);
 
@@ -124,7 +120,6 @@ public class VentaService {
 
         log.info("VentaService:createVenta ejecucion iniciada.");
         Venta newVenta= new Venta(LocalDate.now());
-
         List<LineaVenta> lineaVentas=lineaVentaService.crearLineasVentas(mapeoProducto);
 
         // Asignar la venta a cada línea de venta
@@ -135,8 +130,5 @@ public class VentaService {
 
         return ventaRepository.save(newVenta);
     }
-
-
-
 
 }

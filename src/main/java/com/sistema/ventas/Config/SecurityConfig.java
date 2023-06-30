@@ -32,7 +32,7 @@ public class SecurityConfig {
         http.csrf(csrf ->csrf.disable())
                 .authorizeHttpRequests(authz -> authz
                         //.requestMatchers("/api/ventas/createVenta").authenticated()
-                        //.requestMatchers("/api/ventas/getVentas").hasAuthority(Role.CLIENTE.name())
+                        //.requestMatchers("/api/ventas/getVentas").hasAnyAuthority("ASDSAD","PROVEEDOR")
                         .anyRequest().permitAll())
                 .formLogin(form -> form.permitAll());
 

@@ -1,6 +1,8 @@
 package com.sistema.ventas.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,7 @@ public class LineaCompra {
     private Long nroLinea;
 
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "compra_id")
     private Compra compra;
@@ -23,19 +26,14 @@ public class LineaCompra {
     @Column(name = "precio_unitario")
     private double precioUnitario;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
 
+    public LineaCompra(){}
 
-    private LineaCompra(){}
 
-
-    public LineaCompra(Compra compra, int cantidad, double precioUnitario) {
-        this.compra = compra;
-        this.cantidad = cantidad;
-        this.precioUnitario = precioUnitario;
-    }
 
     public LineaCompra(Compra compra, Producto producto, int cantidad, double precioUnitario) {
         this.compra = compra;

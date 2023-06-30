@@ -90,37 +90,37 @@ Se visualizan todas las compras realizadas desde el primer dia que se inicio la 
 
 
 peticion: CREAR UN PRODUCTO
--`http://localhost:4000/api/productos/createProducto`
+- `http://localhost:4000/api/productos/createProducto`
 Este metodo se necesita enviar como atributo "name,precio,Actualstock" para poder realizar de forma correcta su creacion
 Caso que no se envie esos atributos al body, saltara un mensaje de error 400 "bad request "solitando que ingrese cualquiera de estos campos
 ![image](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/dc31dace-6e9f-4534-9e9a-a695eb193d1d)
 
 peticion: ACTUALIZAR UN PRODUCTO POR ID
--`http://localhost:4000/api/productos/updateProducto/:id`
+- `http://localhost:4000/api/productos/updateProducto/:id`
 Se encarga de actualizar un producto enviando en la peticion un id de un producto existente y cualquiera de estos atributos para actualizar :"name, precio,Actualstock"
 Caso que no exista el producto o se ingrese un atributo no valido, nos dara un error 400 "Bad request" 
 
 peticion : BUSCAR UN PRODUCTO POR NOMBRE
--`http://localhost:4000/api/productos/buscarProductoNombre/:nombreProducto`
+- `http://localhost:4000/api/productos/buscarProductoNombre/:nombreProducto`
 Se encarga de buscar un producto enviando en la peticion un nombre de un producto existente
 Caso que no exista el producto nos dara un error 400 "Bad request"
 
 peticion : BUSCAR UN PRODUCTO POR ID
--`http://localhost:4000/api/productos/buscarProductoId/:id`
+- `http://localhost:4000/api/productos/buscarProductoId/:id`
 Se encarga de buscar un producto enviando en la peticion un id de un producto existente
 Caso que no exista el producto nos dara un error 400 "Bad request"
 
 ## LINEA DE VENTA
 
 peticion: OBTENER TODAS LAS LINEAS DE VENTA
--`http://localhost:4000/api/lineaVentas/getLineaVentas`
+- `http://localhost:4000/api/lineaVentas/getLineaVentas`
 Se visualizan todas las lineas de ventas realizadas desde el primer dia que se inicio la aplicacion
 
 
 ## LINEA DE COMPRA
 
 peticion: OBTENER TODAS LAS LINEAS DE COMPRA
--`http://localhost:4000/api/Lineacompras/getLineaCompras`
+- `http://localhost:4000/api/Lineacompras/getLineaCompras`
 Se visualizan todas las lineas de compras realizadas desde el primer dia que se inicio la aplicacion
 
 
@@ -128,13 +128,13 @@ Se visualizan todas las lineas de compras realizadas desde el primer dia que se 
 ## USUARIO
 
 peticion: OBTENER TODOS LOS USUARIOS
--`http://localhost:4000/api/auth/getUsers`
+- `http://localhost:4000/api/auth/getUsers`
 Se visualizan todas los usuarios creados desde el primer dia que se inicio la aplicacion
 
 
 peticion: CREAR UN USUARIO
 
--`http://localhost:4000/api/auth/createUser`
+- `http://localhost:4000/api/auth/createUser`
 Se encargar de crear un usuario recibiendo como parametro del body: "name", "password", "email"
 Este mismo se crea un rol CLIENTE de forma automatica y nos permite poder realizar diversas peticiones al servidor
 ![image](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/4a52ed62-3e98-4939-8fc5-9b6aa2dac750)

@@ -1,6 +1,10 @@
 # sistema-ventas
 
-Proyecto realizado con java usando el framework spring boot para poder automatizar la creacion de mi servicio API rest:Sistema de ventas
+Proyecto realizado con java, usando el framework spring boot y una base de datos mysql para poder automatizar la creacion de mi servicio API rest:Sistema de ventas
+
+# Diagrama UML
+![Screenshot from 2023-06-30 16-30-57](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/f23ac02b-8c3f-4786-8388-f01271dc7df1)
+
 
 ## Modo de ejecucion:
 Debemos tener instalado docker en nuestro sistema operativo
@@ -23,3 +27,14 @@ Si todo se ejecuto de forma correcta, nos tiene que salir el puerto donde se pue
 
 
 ##  Listado de endpoints, de cada modelo/entidad
+
+#### VENTAS
+URL: CREAR UNA VENTA
+- `http://localhost:4000/api/ventas/createVenta` -
+se crea una venta, con sus respecitvas lineas de ventas asociadas y con la fecha que se realizo. Por ejemplo, si solictamos un producto llamado "caramelo", debemos  tambien agregar la cantidad que necesitamos. Este endpoint creara automaticamente las lineas de ventas con el producto y cantidad respectivamente, descontando del mismo su stock
+- hay que tener en cuenta que el producto debe existir y la cantidad solicitada debe ser menor al que tiene en stock
+![Screenshot from 2023-06-30 16-29-05](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/c04b1c70-a8bc-430d-a92f-2784b042066d)
+
+URL: OBTENER TODAS LAS VENTAS
+- `http://localhost:4000/api/ventas/getVentas`
+Se visualizan todas las ventas realizadas desde el primer dia que se inicio la aplicacion

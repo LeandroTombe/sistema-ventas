@@ -51,7 +51,7 @@ public class UserInfoDetailService implements UserDetailsService {
             throw new ServiceException("El usuario ya existe");
         } else {
             userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
-            userInfo.setRoles(Role.CLIENTE);
+            userInfo.setRoles("CLIENTE");
             UserInfo savedUserInfo = userInfoRepository.save(userInfo);
             log.debug("UserService:addUser devolviendo usuario creado de la base de datos {}", ValueMapper.jsonAsString(savedUserInfo));
             return savedUserInfo;

@@ -10,6 +10,7 @@ import com.sistema.ventas.Repositories.CompraRepository;
 import com.sistema.ventas.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

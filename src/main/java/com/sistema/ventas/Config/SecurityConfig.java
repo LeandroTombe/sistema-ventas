@@ -32,9 +32,18 @@ public class SecurityConfig {
         http.csrf(csrf ->csrf.disable())
                 .authorizeHttpRequests(authz -> authz
                         //.requestMatchers("/api/ventas/createVenta").authenticated()
-                        //.requestMatchers("/api/ventas/getVentas").hasAnyAuthority("ASDSAD","PROVEEDOR")
-                        .anyRequest().permitAll())
-                .formLogin(form -> form.permitAll());
+                        //.requestMatchers("/api/ventas/**").hasAnyAuthority("CLIENTE")
+                        //.requestMatchers("/api/compras/**").hasAnyAuthority("CLIENTE")
+                        //.requestMatchers("/api/productos/**").hasAnyAuthority("CLIENTE")
+                        .anyRequest().permitAll()
+                )
+                .formLogin(form -> form.permitAll()
+                        .defaultSuccessUrl("/api/usuario/profile")
+                )
+                .logout(logout ->logout
+                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessUrl("/api/usuario/login")
+                );
 
         return http.build();
     }

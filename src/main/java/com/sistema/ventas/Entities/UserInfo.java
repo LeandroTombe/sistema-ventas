@@ -26,13 +26,13 @@ public class UserInfo {
     private String password;
 
     //@Enumerated(value = EnumType.STRING)
-    private Role roles;
+    private String roles;
 
 
     public UserInfo() {
     }
 
-    public UserInfo(String name, String email, String password,Role roles) {
+    public UserInfo(String name, String email, String password,String roles) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -69,11 +69,11 @@ public class UserInfo {
         this.password = password;
     }
 
-    public Role getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(Role roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 }

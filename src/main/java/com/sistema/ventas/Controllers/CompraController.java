@@ -3,10 +3,7 @@ package com.sistema.ventas.Controllers;
 
 import com.sistema.ventas.Dto.ApiResponse;
 import com.sistema.ventas.Dto.ReporteCompraDto;
-import com.sistema.ventas.Dto.ReporteVentaDto;
 import com.sistema.ventas.Entities.Compra;
-import com.sistema.ventas.Entities.LineaVenta;
-import com.sistema.ventas.Entities.Venta;
 import com.sistema.ventas.Services.CompraService;
 import com.sistema.ventas.Utils.ValueMapper;
 import jakarta.validation.Valid;

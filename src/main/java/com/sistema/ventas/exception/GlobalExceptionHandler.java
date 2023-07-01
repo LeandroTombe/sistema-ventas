@@ -25,4 +25,11 @@ public class GlobalExceptionHandler {
         // Devuelve la respuesta de error con el estado HTTP apropiado
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<String> handleNullPointerException(NullPointerException ex) {
+        // Manejar el error y retornar una respuesta apropiada
+        String mensajeError = "Ocurrió un error de NullPointerException";
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mensajeError);
+    }
 }

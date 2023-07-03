@@ -65,6 +65,22 @@ peticion: VISUALIZAR GANANCIAS DE UNA SEMANA
 - `http://localhost:4000/api/ventas/getVentasByWeek`
 Se visualizan las ventas de hoy hasta una semana de diferencia, obteniendo la cantidad vendida de cualquier producto y sus respectivas ganancias
 
+peticion: VISUALIZAR VENTAS DE UN MES
+- `http://localhost:4000/api/ventas/getVentasByMonth`
+Se visualizan las ventas de hoy hasta un mes de diferencia
+
+peticion: VISUALIZAR GANANCIAS DE UN MES
+- `http://localhost:4000/api/ventas/getGananciasByMonth`
+Se visualizan las ventas de hoy hasta un mes de diferencia, obteniendo la cantidad vendida de cualquier producto y sus respectivas ganancias
+
+peticion: VISUALIZAR VENTAS DE UN Año
+- `http://localhost:4000/api/ventas/getVentasByYear`
+Se visualizan las ventas de hoy hasta un Año de diferencia
+
+peticion: VISUALIZAR GANANCIAS DE UNA Año
+- `http://localhost:4000/api/ventas/getGananciasByYear`
+Se visualizan las ventas de hoy hasta un Año de diferencia, obteniendo la cantidad vendida de cualquier producto y sus respectivas ganancias
+
 ## COMPRAS
 
 peticion: CREAR UNA COMPRA

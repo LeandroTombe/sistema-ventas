@@ -67,11 +67,20 @@ Se visualizan las ventas de hoy hasta una semana de diferencia, obteniendo la ca
 
 peticion: VISUALIZAR VENTAS DE UN MES
 - `http://localhost:4000/api/ventas/getVentasByMonth`
-Se visualizan las ventas de hoy hasta un mes de diferencia
+Se visualizan las ventas de hoy hasta un mes de diferencia o se puede asignar un parametro de un mes especifico
+ Parametro:
+    - `/api/carts?mes=valor` - se encargar de obtener ventas por mes especifico. En "valor" se reemplaza por cualquier numero positivo de 1 a 12
+  ![image](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/b2cb0512-6159-4010-a8e5-7a6ac00292ae)
+
+
 
 peticion: VISUALIZAR GANANCIAS DE UN MES
 - `http://localhost:4000/api/ventas/getGananciasByMonth`
-Se visualizan las ventas de hoy hasta un mes de diferencia, obteniendo la cantidad vendida de cualquier producto y sus respectivas ganancias
+Se visualizan las ventas de hoy hasta un mes de diferencia o por parametro de un mes especifico, obteniendo la cantidad vendida de cualquier producto y sus respectivas ganancias
+Parametro:
+    - `/api/carts?mes=mes` - se encargar de obtener ventas por mes especifico. En "valor" se reemplaza por cualquier numero positivo de 1 a 12
+      ![image](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/be7f4838-2a36-451d-b4c1-e39876fc915a)
+
 
 peticion: VISUALIZAR VENTAS DE UN Año
 - `http://localhost:4000/api/ventas/getVentasByYear`

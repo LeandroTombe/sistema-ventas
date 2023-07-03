@@ -77,7 +77,7 @@ peticion: VISUALIZAR VENTAS DE UN Año
 - `http://localhost:4000/api/ventas/getVentasByYear`
 Se visualizan las ventas de hoy hasta un Año de diferencia
 
-peticion: VISUALIZAR GANANCIAS DE UNA Año
+peticion: VISUALIZAR GANANCIAS DE UN Año
 - `http://localhost:4000/api/ventas/getGananciasByYear`
 Se visualizan las ventas de hoy hasta un Año de diferencia, obteniendo la cantidad vendida de cualquier producto y sus respectivas ganancias
 

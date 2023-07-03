@@ -50,10 +50,37 @@ public class VentaController {
 
         List<Venta> ventas= ventaService.getVentasByWeek();
         ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(ventas);
-        log.info("VentaController::getVentas response {}", ValueMapper.jsonAsString(ventaApiResponse));
+        log.info("VentaController::getVentasByWeek response {}", ValueMapper.jsonAsString(ventaApiResponse));
 
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
     }
+
+
+    //obtener por mes
+
+    @GetMapping("/getVentasByMonth")
+    public ResponseEntity<ApiResponse> getVentasByMonth(){
+
+        List<Venta> ventas= ventaService.getVentasByMonth();
+        ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(ventas);
+        log.info("VentaController::getVentasByMonth response {}", ValueMapper.jsonAsString(ventaApiResponse));
+
+        return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
+    }
+
+    //obtener por anios
+
+    @GetMapping("/getVentasByYear")
+    public ResponseEntity<ApiResponse> getVentasByYear(){
+
+        List<Venta> ventas= ventaService.getVentasByYear();
+        ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(ventas);
+        log.info("VentaController::getVentasByYear response {}", ValueMapper.jsonAsString(ventaApiResponse));
+
+        return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
+    }
+
+
 
 
     @GetMapping("/getGananciasByWeek")
@@ -64,18 +91,34 @@ public class VentaController {
         log.info("VentaController::getGananciasByWeek response {}", ValueMapper.jsonAsString(reporteVentaApiResponse));
 
         return new ResponseEntity<>(reporteVentaApiResponse, HttpStatus.OK);
-
     }
+
+    @GetMapping("/getGananciasByMonth")
+    public ResponseEntity<ApiResponse> getGananciasByMonth(){
+
+        ReporteVentaDto reporteVentaDto= ventaService.getGananciasByMonth();
+        ApiResponse<ReporteVentaDto> reporteVentaApiResponse= new ApiResponse<>(reporteVentaDto);
+        log.info("VentaController::getGananciasByMonth response {}", ValueMapper.jsonAsString(reporteVentaApiResponse));
+
+        return new ResponseEntity<>(reporteVentaApiResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/getGananciasByYear")
+    public ResponseEntity<ApiResponse> getGananciasByYear(){
+
+        ReporteVentaDto reporteVentaDto= ventaService.getGananciasByYear();
+        ApiResponse<ReporteVentaDto> reporteVentaApiResponse= new ApiResponse<>(reporteVentaDto);
+        log.info("VentaController::getGananciasByWeek response {}", ValueMapper.jsonAsString(reporteVentaApiResponse));
+
+        return new ResponseEntity<>(reporteVentaApiResponse, HttpStatus.OK);
+    }
+
 
     @PostMapping("/createVenta")
     public ResponseEntity<ApiResponse> createVenta(@RequestBody @Valid Map<String,Integer> mapeoLineaVentas){
         Venta newVenta= ventaService.createVenta(mapeoLineaVentas);
         ApiResponse<Venta> ventaApiResponse= new ApiResponse<>(newVenta);
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
-
     }
-
-
-
 
 }

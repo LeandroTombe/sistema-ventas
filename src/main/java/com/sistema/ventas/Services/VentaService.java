@@ -95,6 +95,43 @@ public class VentaService {
         return ventasSemanaDiferencia;
     }
 
+    public List<Venta> getVentasByMonth(){
+        log.info("VentaService:getVentasByMonth ejecucion iniciada.");
+        List<Venta> ventasMesDiferencia = new ArrayList<>();
+        List<Venta> ventas = ventaRepository.findAll();
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaUnMesAtras = fechaActual.minus(1, ChronoUnit.MONTHS);
+
+        for (Venta venta : ventas) {
+            LocalDate fechaVenta = venta.getFechaCreacion();
+            if (!fechaVenta.isBefore(fechaUnMesAtras) && !fechaVenta.isAfter(fechaActual)) {
+                ventasMesDiferencia.add(venta);
+            }
+        }
+
+        log.info("VentaService:getVentasByMonth ejecucion finalizada.");
+        return ventasMesDiferencia;
+    }
+
+    public List<Venta> getVentasByYear(){
+        log.info("VentaService:getVentasByYear ejecucion iniciada.");
+        List<Venta> ventasAniosDiferencia = new ArrayList<>();
+        List<Venta> ventas = ventaRepository.findAll();
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaUnAniosAtras = fechaActual.minus(1, ChronoUnit.YEARS);
+
+        for (Venta venta : ventas) {
+            LocalDate fechaVenta = venta.getFechaCreacion();
+            if (!fechaVenta.isBefore(fechaUnAniosAtras) && !fechaVenta.isAfter(fechaActual)) {
+                ventasAniosDiferencia.add(venta);
+            }
+        }
+
+        log.info("VentaService:getVentasByYear ejecucion finalizada.");
+        return ventasAniosDiferencia;
+
+    }
+
     public ReporteVentaDto getGananciasByWeek(){
         List<Venta> ventas=getVentasByWeek();
         ReporteVentaDto reporteVentaDto= new ReporteVentaDto();
@@ -115,6 +152,49 @@ public class VentaService {
 
         return reporteVentaDto;
     }
+
+    public ReporteVentaDto getGananciasByMonth(){
+        List<Venta> ventas=getVentasByMonth();
+        ReporteVentaDto reporteVentaDto= new ReporteVentaDto();
+        Double total=0.0;
+        Integer cantidad=0;
+
+        for (Venta venta:ventas) {
+            reporteVentaDto.getVenta().add(venta);
+            List<LineaVenta> lineaVentas=venta.getLineaVentas();
+
+            for (LineaVenta lineaventa:lineaVentas) {
+                total+=(lineaventa.getPrecioUnitario()* lineaventa.getCantidad());
+                cantidad +=lineaventa.getCantidad();
+            }
+        }
+        reporteVentaDto.setCantidad(cantidad);
+        reporteVentaDto.setGananciaTotal(total);
+
+        return reporteVentaDto;
+    }
+
+    public ReporteVentaDto getGananciasByYear(){
+        List<Venta> ventas=getVentasByYear();
+        ReporteVentaDto reporteVentaDto= new ReporteVentaDto();
+        Double total=0.0;
+        Integer cantidad=0;
+
+        for (Venta venta:ventas) {
+            reporteVentaDto.getVenta().add(venta);
+            List<LineaVenta> lineaVentas=venta.getLineaVentas();
+
+            for (LineaVenta lineaventa:lineaVentas) {
+                total+=(lineaventa.getPrecioUnitario()* lineaventa.getCantidad());
+                cantidad +=lineaventa.getCantidad();
+            }
+        }
+        reporteVentaDto.setCantidad(cantidad);
+        reporteVentaDto.setGananciaTotal(total);
+
+        return reporteVentaDto;
+    }
+
 
     public Venta createVenta(Map<String,Integer> mapeoProducto){
 

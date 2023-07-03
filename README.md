@@ -167,13 +167,17 @@ Este mismo se crea un rol CLIENTE de forma automatica y nos permite poder realiz
 
 # AUTORIZACION
 Los que estan como INTERNAUTAS pueden acceder a los endpoints de:
+
 USUARIO --> CREAR UN USUARIO
 
 Los que estan logueado como CLIENTE pueden acceder a los endpoints de :
+
 PRODUCTOS --> OBTENER TODOS LOS PRODUCTOS, BUSCAR UN PRODUCTO POR NOMBRE, BUSCAR UN PRODUCTO POR ID
+
 VENTAS --> CREAR UNA VENTA,
 
 Los que estan logueado como PROVEEDOR pueden acceder a los endpoints de :
+
 COMPRAS --> CREAR UNA COMPRA
 
 Los que estan como ADMIN pueden acceder a todos los endpoints

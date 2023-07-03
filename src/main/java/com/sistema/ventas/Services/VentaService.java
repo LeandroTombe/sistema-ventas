@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +113,25 @@ public class VentaService {
         log.info("VentaService:getVentasByMonth ejecucion finalizada.");
         return ventasMesDiferencia;
     }
+    public List<Venta> getVentasByMonth(Integer numMes){
+        log.info("VentaService:getVentasByEspecifyMonth ejecucion iniciada.");
+        List<Venta> ventasMesDiferencia = new ArrayList<>();
+        List<Venta> ventas = ventaRepository.findAll();
+
+        LocalDate mesEspecifico= LocalDate.of(2023,numMes,1);
+
+        LocalDate ultimoDiaMes= mesEspecifico.withDayOfMonth(mesEspecifico.lengthOfMonth());
+
+        for (Venta venta : ventas) {
+            LocalDate fechaVenta = venta.getFechaCreacion();
+            if (fechaVenta.isAfter(mesEspecifico.minusDays(1)) && fechaVenta.isBefore(ultimoDiaMes.plusDays(1))){
+                ventasMesDiferencia.add(venta);
+            }
+        }
+
+        log.info("VentaService:getVentasByEspecifyMonth ejecucion finalizada.");
+        return ventasMesDiferencia;
+    }
 
     public List<Venta> getVentasByYear(){
         log.info("VentaService:getVentasByYear ejecucion iniciada.");
@@ -155,6 +175,27 @@ public class VentaService {
 
     public ReporteVentaDto getGananciasByMonth(){
         List<Venta> ventas=getVentasByMonth();
+        ReporteVentaDto reporteVentaDto= new ReporteVentaDto();
+        Double total=0.0;
+        Integer cantidad=0;
+
+        for (Venta venta:ventas) {
+            reporteVentaDto.getVenta().add(venta);
+            List<LineaVenta> lineaVentas=venta.getLineaVentas();
+
+            for (LineaVenta lineaventa:lineaVentas) {
+                total+=(lineaventa.getPrecioUnitario()* lineaventa.getCantidad());
+                cantidad +=lineaventa.getCantidad();
+            }
+        }
+        reporteVentaDto.setCantidad(cantidad);
+        reporteVentaDto.setGananciaTotal(total);
+
+        return reporteVentaDto;
+    }
+
+    public ReporteVentaDto getGananciasByMonth(Integer numMes){
+        List<Venta> ventas=getVentasByMonth(numMes);
         ReporteVentaDto reporteVentaDto= new ReporteVentaDto();
         Double total=0.0;
         Integer cantidad=0;

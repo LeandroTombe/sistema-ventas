@@ -11,12 +11,14 @@ import com.sistema.ventas.Utils.ValueMapper;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -59,9 +61,15 @@ public class VentaController {
     //obtener por mes
 
     @GetMapping("/getVentasByMonth")
-    public ResponseEntity<ApiResponse> getVentasByMonth(){
+    public ResponseEntity<ApiResponse> getVentasByMonth(@RequestParam(value = "mes",required = false) @DateTimeFormat(pattern = "MM") Integer mes){
+        List<Venta> ventas=new ArrayList<>();
+        if (mes !=null){
+            ventas= ventaService.getVentasByMonth(mes);
+        } else {
+            ventas= ventaService.getVentasByMonth();
 
-        List<Venta> ventas= ventaService.getVentasByMonth();
+        }
+
         ApiResponse<List<Venta>> ventaApiResponse= new ApiResponse<>(ventas);
         log.info("VentaController::getVentasByMonth response {}", ValueMapper.jsonAsString(ventaApiResponse));
 
@@ -80,9 +88,6 @@ public class VentaController {
         return new ResponseEntity<>(ventaApiResponse, HttpStatus.OK);
     }
 
-
-
-
     @GetMapping("/getGananciasByWeek")
     public ResponseEntity<ApiResponse> getGananciasByWeek(){
 
@@ -94,9 +99,13 @@ public class VentaController {
     }
 
     @GetMapping("/getGananciasByMonth")
-    public ResponseEntity<ApiResponse> getGananciasByMonth(){
-
-        ReporteVentaDto reporteVentaDto= ventaService.getGananciasByMonth();
+    public ResponseEntity<ApiResponse> getGananciasByMonth(@RequestParam(value = "mes",required = false) @DateTimeFormat(pattern = "MM") Integer mes){
+        ReporteVentaDto reporteVentaDto;
+        if (mes==null){
+            reporteVentaDto= ventaService.getGananciasByMonth();
+        } else {
+            reporteVentaDto= ventaService.getGananciasByMonth(mes);
+        }
         ApiResponse<ReporteVentaDto> reporteVentaApiResponse= new ApiResponse<>(reporteVentaDto);
         log.info("VentaController::getGananciasByMonth response {}", ValueMapper.jsonAsString(reporteVentaApiResponse));
 

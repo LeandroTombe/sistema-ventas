@@ -37,6 +37,15 @@ Inversión de control (Inversion of Control en inglés, IoC) es un principio de 
 ### IoC y DI en Spring
 El contenedor Spring IoC lee el elemento de configuración durante el tiempo de ejecución y luego ensambla el Bean a través de la configuración. La inyección de dependencia de Spring se puede lograr a través del constructor, el método Setter y el dominio de entidad. Podemos hacer uso de la anotación @Autowired para inyectar la dependencia en el contexto requerido. O si usamos Lombok, podemos hacer uso de la anotación @Setter, @AllArgsConstructor, siempre y cuando declaremos como final las dependencias necesitadas.
 
+## Spring Security
+[Spring Security](https://spring.io/projects/spring-security) es una librería de seguridad que nos permite controlar el acceso a nuestra aplicación permitiendo mecanismos de autenticación y autorización en base a roles.
+
+Para ello haremos uso de UserDetailsService, un servicio que nos permitirá cargar datos específicos del usuario.
+
+Además, actuará como middleware, analizando las rutas y con ellas a base de roles saber si se puede permitir el acceso a operar con ellas.
+
+![Spring-Security-Architecture](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/9ee5c90c-57fa-4905-90e7-e6343e39a74c)
+
 
 ## Modo de ejecucion:
 Debemos tener instalado docker en nuestro sistema operativo

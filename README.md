@@ -28,6 +28,9 @@ La anotación @Bean, nos sirve para indicar que este bean será administrado por
 ## Modo de ejecucion:
 Debemos tener instalado docker en nuestro sistema operativo
 
+![1_XYhEwqz78qHuSsZvUt5R6Q](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/2a359324-ddc8-4b30-a0f0-84ff05701511)
+
+
 1) primer paso es ejecutar un comando que nos permite construir, a traves de docker, un ejecutable de java y exponerlo en un puerto cualquiera, en este caso, elegi el puerto 4000 el "." del final nos buscara dentro del directo el Dockerfile, para esto sea efectivo, debemos posicionarnos en la carpeta sistemas-ventas
 
 ```shell

@@ -1,6 +1,8 @@
-# sistema-ventas
 
-Proyecto realizado con java, usando el framework spring boot y una base de datos mysql para poder automatizar la creacion de mi servicio API rest:Sistema de ventas
+## API REST
+
+Sencilla Api REST con Spring Boot realizada para implementar un sistema de ventas
+En este proyecto realizaremos una API REST con Spring Boot. Es decir, un servicio web que accede a datos de una base de datos para gestionar un recurso, donde a su vez, podemos realizar operaciones CRUD (Create, Read, Update, Delete) implementando mecanismos autenticación y autorización.
 
 # Diagrama UML
 ![Screenshot from 2023-06-30 16-30-57](https://github.com/LeandroTombe/sistema-ventas/assets/57770761/f23ac02b-8c3f-4786-8388-f01271dc7df1)

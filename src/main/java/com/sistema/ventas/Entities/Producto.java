@@ -35,6 +35,8 @@ public class Producto {
     @Column(name = "precio_actual")
     private Double precioActual;
 
+    private String imageUri;
+
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
 

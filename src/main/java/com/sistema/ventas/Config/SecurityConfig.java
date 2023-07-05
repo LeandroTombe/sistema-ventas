@@ -21,7 +21,6 @@ public class SecurityConfig {
     @Bean
     //For authentication
     public UserDetailsService userDetailsService(){
-
         return new UserInfoDetailService();
     }
 

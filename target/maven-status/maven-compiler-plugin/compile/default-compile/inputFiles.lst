@@ -7,6 +7,7 @@
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/exception/ValidationExceptionHandler.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Controllers/LineaVentaController.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Controllers/ProductoController.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Services/UsuarioService.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/ApiResponse.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/LineaVentaRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Services/ProductoService.java
@@ -22,11 +23,14 @@
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Controllers/LineaCompraController.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/ErrorDto.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/LineaCompraRepository.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Config/CorsConfig.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Controllers/UsuarioController.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/CompraRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Utils/ValueMapper.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Config/UserInfoUserDetails.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Entities/UserInfo.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/ProductoRepository.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/UsuarioRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/VentasApplication.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/UserInfoRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Services/VentaService.java

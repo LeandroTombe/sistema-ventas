@@ -38,7 +38,6 @@ public class Venta {
         return idVenta;
     }
 
-
     public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
@@ -54,4 +53,6 @@ public class Venta {
     public void setLineaVentas(List<LineaVenta> lineaVentas) {
         this.lineaVentas = lineaVentas;
     }
+
+
 }

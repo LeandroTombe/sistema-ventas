@@ -31,7 +31,7 @@ public class SecurityConfig {
         http.csrf(csrf ->csrf.disable())
                 .authorizeHttpRequests(authz -> authz
                         //.requestMatchers("/api/ventas/createVenta").authenticated()
-                        //.requestMatchers("/api/ventas/**").hasAnyAuthority("CLIENTE")
+                        //.requestMatchers("/api/ventas/**").hasAnyAuthority("CLIENTE","")
                         //.requestMatchers("/api/compras/**").hasAnyAuthority("CLIENTE")
                         //.requestMatchers("/api/productos/**").hasAnyAuthority("CLIENTE")
                         .anyRequest().permitAll()

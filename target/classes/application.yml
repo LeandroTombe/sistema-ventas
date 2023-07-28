@@ -12,3 +12,4 @@ spring:
       ddl-auto: update
     generate-ddl: true
     show-sql: true
+    defer-datasource-initialization: true

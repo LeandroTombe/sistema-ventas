@@ -5,6 +5,7 @@ import com.sistema.ventas.Dto.LoginDto;
 import com.sistema.ventas.Dto.NameEmailUserDto;
 import com.sistema.ventas.Entities.Enums.Role;
 import com.sistema.ventas.Entities.UserInfo;
+import com.sistema.ventas.Services.JwtService;
 import com.sistema.ventas.Services.UserInfoDetailService;
 import com.sistema.ventas.exception.GlobalExceptionHandler;
 import com.sistema.ventas.exception.ServiceException;
@@ -12,13 +13,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.AuthorizeRequestsDsl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +39,11 @@ public class authController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+
+
+    @Autowired
+    private JwtService jwtService;
 
 
     @PostMapping("/createUser")
@@ -69,12 +78,30 @@ public class authController {
             SecurityContext sc= SecurityContextHolder.getContext();
             sc.setAuthentication(authentication);
             HttpSession session = req.getSession(true);
-            session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
 
-            return new ResponseEntity<>(HttpStatus.OK);
+            session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
+            String logueadoCorrecto="logueado correctamente";
+            ApiResponse<String> productoApiResponse = new ApiResponse<>(logueadoCorrecto);
+
+
+            return ResponseEntity.ok().header("Content-Type", "application/json").body(loginDto.getUsername());
         } catch (Exception e) {
             throw new ServiceException("Error de autenticación: " + e.getMessage());
         }
     }
 
+
+
+    @PostMapping("/authenticate")
+    public String authenticatedAndGetToken(@RequestBody LoginDto loginDto){
+        Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(),loginDto.getPassword()));
+
+        if (authentication.isAuthenticated()){
+            return jwtService.generateToken(loginDto.getUsername());
+
+        } else {
+            throw new UsernameNotFoundException("invalid user request");
+        }
+
+    }
 }

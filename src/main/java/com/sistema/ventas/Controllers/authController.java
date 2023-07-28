@@ -71,7 +71,7 @@ public class authController {
             HttpSession session = req.getSession(true);
             session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
 
-            return new ResponseEntity<>("Logueado de forma correcta", HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             throw new ServiceException("Error de autenticación: " + e.getMessage());
         }

@@ -66,8 +66,6 @@ public class authController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userInfoApiResponse);
     }
 
-
-
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(HttpServletRequest req, @RequestBody LoginDto loginDto) {
         try {
@@ -93,11 +91,13 @@ public class authController {
 
 
     @PostMapping("/authenticate")
-    public String authenticatedAndGetToken(@RequestBody LoginDto loginDto){
+    public ResponseEntity<?> authenticatedAndGetToken(@RequestBody LoginDto loginDto){
         Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(),loginDto.getPassword()));
 
         if (authentication.isAuthenticated()){
-            return jwtService.generateToken(loginDto.getUsername());
+            String userauth= jwtService.generateToken(loginDto.getUsername());
+            ApiResponse<String> userAuthApiResponse = new ApiResponse<>(userauth);
+            return ResponseEntity.status(HttpStatus.OK).body(userAuthApiResponse);
 
         } else {
             throw new UsernameNotFoundException("invalid user request");

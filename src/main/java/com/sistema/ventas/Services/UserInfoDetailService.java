@@ -9,6 +9,7 @@ import com.sistema.ventas.Utils.ValueMapper;
 import com.sistema.ventas.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +28,9 @@ public class UserInfoDetailService implements UserDetailsService {
     @Autowired
     private UserInfoRepository userInfoRepository;
 
+    @Lazy
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -48,6 +52,7 @@ public class UserInfoDetailService implements UserDetailsService {
             log.error("El usuario ya existe");
             throw new ServiceException("El usuario ya existe");
         } else {
+            userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
             userInfo.setRoles("CLIENTE");
             UserInfo savedUserInfo = userInfoRepository.save(userInfo);
             log.debug("UserService:addUser devolviendo usuario creado de la base de datos {}", ValueMapper.jsonAsString(savedUserInfo));

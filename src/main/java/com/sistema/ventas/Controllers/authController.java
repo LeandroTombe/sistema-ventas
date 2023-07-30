@@ -3,6 +3,7 @@ package com.sistema.ventas.Controllers;
 import com.sistema.ventas.Dto.ApiResponse;
 import com.sistema.ventas.Dto.LoginDto;
 import com.sistema.ventas.Dto.NameEmailUserDto;
+import com.sistema.ventas.Dto.UserInfoDto;
 import com.sistema.ventas.Entities.Enums.Role;
 import com.sistema.ventas.Entities.UserInfo;
 import com.sistema.ventas.Services.JwtService;
@@ -96,7 +97,8 @@ public class authController {
 
         if (authentication.isAuthenticated()){
             String userauth= jwtService.generateToken(loginDto.getUsername());
-            ApiResponse<String> userAuthApiResponse = new ApiResponse<>(userauth);
+            UserInfoDto userInfoDto= new UserInfoDto(loginDto.getUsername(),userauth);
+            ApiResponse<UserInfoDto> userAuthApiResponse = new ApiResponse<>(userInfoDto);
             return ResponseEntity.status(HttpStatus.OK).body(userAuthApiResponse);
 
         } else {

@@ -21,12 +21,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.AuthorizeRequestsDsl;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
@@ -97,7 +99,8 @@ public class authController {
 
         if (authentication.isAuthenticated()){
             String userauth= jwtService.generateToken(loginDto.getUsername());
-            UserInfoDto userInfoDto= new UserInfoDto(loginDto.getUsername(),userauth);
+            String rol= authentication.getAuthorities().iterator().next().getAuthority();
+            UserInfoDto userInfoDto= new UserInfoDto(loginDto.getUsername(),userauth,rol);
             ApiResponse<UserInfoDto> userAuthApiResponse = new ApiResponse<>(userInfoDto);
             return ResponseEntity.status(HttpStatus.OK).body(userAuthApiResponse);
 

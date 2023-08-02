@@ -26,7 +26,7 @@ public class ProductoController {
     ProductoService productoService;
 
     @GetMapping("/getProductos")
-    @PreAuthorize("hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('CLIENTE')")
 
     public ResponseEntity<ApiResponse> getProductos(){
         List<Producto> productos= productoService.getProductos();

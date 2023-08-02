@@ -19,6 +19,7 @@
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/UserInfoDto.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Entities/Producto.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Entities/Compra.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/LoginDto.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Entities/Enums/Role.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Controllers/LineaCompraController.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/ErrorDto.java
@@ -32,11 +33,13 @@
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/ProductoRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/UsuarioRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/VentasApplication.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Services/JwtService.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Repositories/UserInfoRepository.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Services/VentaService.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/ReporteCompraDto.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Entities/LineaCompra.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Controllers/VentaController.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Services/CompraService.java
+/home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Filter/JwtAuthFilter.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Controllers/CompraController.java
 /home/leandrot/IdeaProjects/ClienteServidor/sistema-ventas/src/main/java/com/sistema/ventas/Dto/NameEmailUserDto.java
